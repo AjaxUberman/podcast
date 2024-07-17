@@ -3,6 +3,7 @@ import RightSideBar from "@/components/RightSideBar";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "PodcasTR",
@@ -24,14 +25,14 @@ export default function RootLayout({
           <div className="hidden md:flex">
             <LeftSideBar />
           </div>
-          <div className="md:hidden">
+          <Link href={"/"} className="md:hidden">
             <Image
               src={"/icons/logo.svg"}
               width={30}
               height={30}
               alt="menu_icon"
             />
-          </div>
+          </Link>
         </div>
         <div className="col-span-3 py-14 px-20 bg-black">
           {children}

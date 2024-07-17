@@ -1,4 +1,3 @@
-"use client";
 import MainPage from "@/components/pages/MainPage";
 import React from "react";
 
