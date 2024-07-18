@@ -1,17 +1,9 @@
-import LeftSideBar from "@/components/LeftSideBar";
-import RightSideBar from "@/components/RightSideBar";
-import type { Metadata } from "next";
+import LeftSidebar from "@/components/LeftSidebar";
+import MobileNav from "@/components/MobileNav";
+import RightSidebar from "@/components/RightSidebar";
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster";
-import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "PodcasTR",
-  description: "Generate your podcast with AI",
-  icons: {
-    icon: "/icons/logo.svg",
-  },
-};
+import PodcastPlayer from "@/components/PodcastPlayer";
 
 export default function RootLayout({
   children,
@@ -19,29 +11,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="relative">
-      <main className="grid md:grid-cols-5 text-white-1 bg-black-3 ">
-        <div>
-          <div className="hidden md:flex">
-            <LeftSideBar />
+    <div className="relative flex flex-col">
+      <main className="relative flex text-white-1 bg-black-3">
+        <LeftSidebar />
+        <section className="flex min-h-screen flex-1 flex-col px-4 sm:px-14">
+          <div className="mx-auto flex w-full max-w-5xl flex-col max-sm:px-4">
+            <div className="flex h-16 items-center justify-between md:hidden">
+              <Image
+                src="/icons/logo.svg"
+                width={30}
+                height={30}
+                alt="menu icon"
+              />
+              <MobileNav />
+            </div>
+            <div className="flex flex-col md:pb-14 pt-10">
+              <Toaster />
+              {children}
+            </div>
           </div>
-          <Link href={"/"} className="md:hidden">
-            <Image
-              src={"/icons/logo.svg"}
-              width={30}
-              height={30}
-              alt="menu_icon"
-            />
-          </Link>
-        </div>
-        <div className="col-span-3 py-14 px-20 bg-black">
-          {children}
-          <Toaster />
-        </div>
-        <div className="hidden md:flex">
-          <RightSideBar />
-        </div>
+        </section>
+
+        <RightSidebar />
       </main>
+
+      <PodcastPlayer />
     </div>
   );
 }

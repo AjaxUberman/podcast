@@ -8,7 +8,6 @@ const MainPage = () => {
   const trendingPodcasts = useQuery(api.podcasts.getTrendingPodcasts);
   if (!trendingPodcasts) return <LoaderSpinner />;
 
-  console.log(trendingPodcasts);
   return (
     <div className=" flex flex-col ">
       <section className="flex flex-col gap-4">

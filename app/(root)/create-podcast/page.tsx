@@ -64,7 +64,6 @@ const CreatePodcast = () => {
   const createPodcast = useMutation(api.podcasts.createPodcast);
 
   const { toast } = useToast();
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -103,7 +102,7 @@ const CreatePodcast = () => {
     } catch (error) {
       console.log(error);
       toast({
-        title: "Error",
+        title: "It's generating...)",
         variant: "destructive",
       });
       setIsSubmitting(false);

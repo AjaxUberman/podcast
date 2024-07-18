@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { GenerateThumbnailProps } from "@/types";
@@ -79,22 +80,25 @@ const GenerateThumbnail = ({
   };
 
   return (
-    <div>
-      <div className="generate_thumbnail flex flex-col items-center ">
+    <>
+      <div className="generate_thumbnail">
         <Button
           type="button"
           variant="plain"
-          className={` w-full ${isAiThumbnail ? "bg-black-6" : ""}`}
           onClick={() => setIsAiThumbnail(true)}
+          className={cn("", {
+            "bg-black-6": isAiThumbnail,
+          })}
         >
-          Use AI to generate thumbnail.
+          Use AI to generate thumbnail
         </Button>
-        <h1 className="wider font-semibold">Or</h1>
         <Button
           type="button"
           variant="plain"
-          className={` w-full ${!isAiThumbnail ? "bg-black-6" : ""}`}
           onClick={() => setIsAiThumbnail(false)}
+          className={cn("", {
+            "bg-black-6": !isAiThumbnail,
+          })}
         >
           Upload custom image
         </Button>
@@ -132,13 +136,18 @@ const GenerateThumbnail = ({
         </div>
       ) : (
         <div className="image_div" onClick={() => imageRef?.current?.click()}>
-          <Input type="file" className="hidden" ref={imageRef} />
+          <Input
+            type="file"
+            className="hidden"
+            ref={imageRef}
+            onChange={(e) => uploadImage(e)}
+          />
           {!isImageLoading ? (
             <Image
               src="/icons/upload-image.svg"
-              alt="upload-img"
               width={40}
               height={40}
+              alt="upload"
             />
           ) : (
             <div className="text-16 flex-center font-medium text-white-1">
@@ -147,12 +156,25 @@ const GenerateThumbnail = ({
             </div>
           )}
           <div className="flex flex-col items-center gap-1">
-            <h2 className="text-orange-1">Click to Upload</h2>
-            <p className="text-xs opacity-70">SVG, PNG, JPG </p>
+            <h2 className="text-12 font-bold text-orange-1">Click to upload</h2>
+            <p className="text-12 font-normal text-gray-1">
+              SVG, PNG, JPG, or GIF (max. 1080x1080px)
+            </p>
           </div>
         </div>
       )}
-    </div>
+      {image && (
+        <div className="flex-center w-full">
+          <Image
+            src={image}
+            width={200}
+            height={200}
+            className="mt-5"
+            alt="thumbnail"
+          />
+        </div>
+      )}
+    </>
   );
 };
 
