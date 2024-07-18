@@ -10,14 +10,17 @@ import { useQuery } from "convex/react";
 import Image from "next/image";
 import React from "react";
 
-const page = ({ params }: { params: { podcastId: Id<"podcasts"> } }) => {
+const PodcastPage = ({ params }: { params: { podcastId: Id<"podcasts"> } }) => {
   const { user } = useUser();
+
   const podcast = useQuery(api.podcasts.getPodcastById, {
     podcastId: params.podcastId,
   });
+
   const similarPodcasts = useQuery(api.podcasts.getSimilarPodcasts, {
     podcastId: params.podcastId,
   });
+
   const isOwner = user?.id === podcast?.authorId;
   if (!similarPodcasts || !podcast) {
     return <LoaderSpinner />;
@@ -93,4 +96,4 @@ const page = ({ params }: { params: { podcastId: Id<"podcasts"> } }) => {
   );
 };
 
-export default page;
+export default PodcastPage;
