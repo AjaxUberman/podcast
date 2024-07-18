@@ -1,6 +1,6 @@
-import LeftSidebar from "@/components/LeftSidebar";
+import LeftSideBar from "@/components/LeftSideBar";
 import MobileNav from "@/components/MobileNav";
-import RightSidebar from "@/components/RightSidebar";
+import RightSideBar from "@/components/RightSideBar";
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster";
 import PodcastPlayer from "@/components/PodcastPlayer";
@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <div className="relative flex flex-col">
       <main className="relative flex text-white-1 bg-black-3">
-        <LeftSidebar />
+        <LeftSideBar />
         <section className="flex min-h-screen flex-1 flex-col px-4 sm:px-14">
           <div className="mx-auto flex w-full max-w-5xl flex-col max-sm:px-4">
             <div className="flex h-16 items-center justify-between md:hidden">
@@ -32,7 +32,7 @@ export default function RootLayout({
           </div>
         </section>
 
-        <RightSidebar />
+        <RightSideBar />
       </main>
 
       <PodcastPlayer />
